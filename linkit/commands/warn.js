@@ -72,7 +72,7 @@ module.exports = {
                 .setTimestamp()
                 channel.send({ embeds: [embed3] });
         break;
-        } //const L-buddy = "MTA3NDg1NTM0NzI4MzU1ODUzMA.G0Kyt8.lfLpTgVXv_69XRT3toq92b10XgfsB_4dsSibS0"
+        }
 
     }
 }
