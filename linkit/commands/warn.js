@@ -11,7 +11,8 @@ module.exports = {
             subcommand
                 .setName('add')
                 .setDescription('add warnings')
-                .addUserOption(option => option.setName('target').setDescription('The member to give a demerit to').setRequired(true)))
+                .addUserOption(option => option.setName('target').setDescription('The member to give a demerit to').setRequired(true))
+      .addStringOption(option => option.setName('reason').setDescription('warn reasoning').setRequired(true)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
@@ -28,6 +29,7 @@ module.exports = {
         const tohack = interaction.options.getMember('target');
         const channel = client.channels.cache.get('1084944035912876125');
         const demerits = JSON.parse(fs.readFileSync("./linkit/demerits.json", "utf-8") || "");
+      const a = interaction.options.getString('reason');
         switch (interaction.options._subcommand) {
             case 'add':
                 if (demerits[tohack.user.tag]) demerits[tohack.user.tag].count++;
@@ -39,7 +41,7 @@ module.exports = {
                 const embed = new EmbedBuilder()
 
                  .setAuthor({ name: `${interaction.user.tag}` })
-                .setTitle(`Gave a Warning to ${tohack.displayName}.`)
+                .setTitle(`Gave a Warning to ${tohack.displayName} for ${a}.`)
                 .setColor('#03fc2c')
                 .setTimestamp()
                 channel.send({ embeds: [embed] });
