@@ -24,6 +24,12 @@ function createServer(req, res) {
         case '/index.html':
             doc = fs.readFile(__dirname + '/public/index.html', fsCallback);
         break;
+        case '/Contact.html':
+            doc = fs.readFile(__dirname + '/public/Contact.html', fsCallback);
+        break;
+        case '/About.html':
+            doc = fs.readFile(__dirname + '/public/About.html', fsCallback);
+        break;
         default:
             doc = fs.readFile(__dirname + '/public/index.html', fsCallback);
         break;
