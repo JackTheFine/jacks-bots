@@ -11,7 +11,7 @@ const fs = require('node:fs');
 const { token } = require('../config.json');
 //require("../quotes/index")
 require("./deploy-commands")
-//require("../flyvalle bot/index1")
+require("../flyvalle bot/index1")
 require("../rambam bot/index2")
 require("../linkit/index3")
 //require("../ftcli/index4")

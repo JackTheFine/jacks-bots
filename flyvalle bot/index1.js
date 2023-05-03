@@ -1,10 +1,9 @@
-const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
-const { token, token1 } = require('../config.json');
-const { MessageEmbed } = require('discord.js')
+const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const fs = require('node:fs');
+const { token1 } = require('../config.json');
 require("./deploy-commands1")
 
-const client1 = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
+const client1 = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMembers] });
 
 client1.commandsb = new Collection();
 const commandbFiles = fs.readdirSync('./flyvalle bot/flyvalle').filter(file => file.endsWith('.js'));
@@ -21,13 +20,13 @@ for (const file of commandFiles) {
   client1.commands.set(command.data.name, command);
 }
 
-client1.once('ready', () => {
+client1.once(Events.ClientReady, () => {
   console.log(`Ready! (logged into ${client1.user.tag})`);
   client1.user.setActivity(`all these flights.`, { type: "WATCHING" })
   client1.user.setStatus("online")
 });
 
-client1.on('interactionCreate', async interaction => {
+client1.on(Events.InteractionCreate, async interaction => {
   if (!interaction.isCommand()) return;
 
   const commandb = client1.commandsb.get(interaction.commandName);

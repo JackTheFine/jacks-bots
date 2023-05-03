@@ -17,7 +17,8 @@ module.exports = {
             subcommand
                 .setName('remove')
                 .setDescription('remove warnings')
-                .addUserOption(option => option.setName('target').setDescription('The member to remove a demerit from').setRequired(true)))
+                .addUserOption(option => option.setName('target').setDescription('The member to remove a demerit from').setRequired(true))
+          .addStringOption(option => option.setName('reason').setDescription('warn reasoning').setRequired(true)))
       .addSubcommand(subcommand =>
       subcommand
         .setName('check')
@@ -29,7 +30,7 @@ module.exports = {
         const tohack = interaction.options.getMember('target');
         const channel = client.channels.cache.get('1084944035912876125');
         const demerits = JSON.parse(fs.readFileSync("./linkit/demerits.json", "utf-8") || "");
-      const a = interaction.options.getString('reason');
+      const a = interaction.options.getString('reason')
         switch (interaction.options._subcommand) {
             case 'add':
                 if (demerits[tohack.user.tag]) demerits[tohack.user.tag].count++;
@@ -45,6 +46,7 @@ module.exports = {
                 .setColor('#03fc2c')
                 .setTimestamp()
                 channel.send({ embeds: [embed] });
+            return tohack.user.send(`You got a warning in FoxTech for: ${a}. Please use better judgement in the future to prevent further actions.`)
                 break;
             case 'remove':
                 if (demerits[tohack.user.tag].count == '0') return interaction.reply(`${tohack.displayName} needs a warning before being able to remove one!`)
@@ -61,6 +63,7 @@ module.exports = {
                 .setColor('#03fc2c')
                 .setTimestamp()
                 channel.send({ embeds: [embed2] });
+            return tohack.user.send(`Your warning: ${a} has expired.`)
                 break;
             case 'check':
         interaction.reply(demerits[tohack.user.tag] ? `${tohack.displayName} has ${demerits[tohack.user.tag].count} warning${demerits[tohack.user.tag].count != 1 ? "s" : ""}!` : "This user has no warnings.");

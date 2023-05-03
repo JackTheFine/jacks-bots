@@ -20,7 +20,7 @@ for (const file of commandFiles) {
 
 }
 
-const rest1 = new REST({ version: '9' }).setToken(token1);
+const rest1 = new REST({ version: '10' }).setToken(token1);
 try {
   rest1.put(Routes.applicationCommands(clientId1), { body: commands });
   rest1.put(Routes.applicationGuildCommands(clientId1, guildId1), { body: commandsb })
