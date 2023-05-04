@@ -37,7 +37,7 @@ function createServer(req, res) {
 }
 try {
   app.listen(8080);
-  console.log("Ready! (logged into JackTheFine.dev)")
+  console.log("Ready! (logged into JackTheFine.dev)");
 } catch (error) {
-  console.log("ERROR WITH SITE OPEN")
+  console.log("ERROR WITH SITE OPEN");
 }
