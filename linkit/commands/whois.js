@@ -13,11 +13,13 @@ module.exports = {
         const Target = interaction.options.getMember('target');
     const Member = interaction.guild.members.cache.get(Target.id)
     const Response = new EmbedBuilder()
-      .setAuthor(`${Target.user.tag}`, Target.displayAvatarURL({ dynamic: true }))
+      .setAuthor({ name: `${Target.user.tag}`, iconURL: Target.displayAvatarURL({ dynamic: true })})
       .setThumbnail(Target.displayAvatarURL({ dynamic: true }))
-      .addField("UserID", `${Target.id}`, false)
-      .addField("Roles", `${Member.roles.cache.map(r => r).join(' ').replace("@everyone", " ")}`)
-      .addField("Server Member Since", `${moment(Member.joinedAt).format('MMMM Do YYYY, h:mm:ss a')}\n**-** ${moment(Member.joinedAt).startOf('day').fromNow()}`)
+      .addFields(
+        {name: "UserID", value: `${Target.id}`},
+        {name: "Roles", value: `${Member.roles.cache.map(r => r).join(' ').replace("@everyone", " ")}`},
+        {name: "Server Member Since", value: `${moment(Member.joinedAt).format('MMMM Do YYYY, h:mm:ss a')}\n**-** ${moment(Member.joinedAt).startOf('day').fromNow()}`}
+      )
       return interaction.reply({ embeds: [Response] })
     }
 }
