@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const db = require("../db.js");
 db.loadFromFile("./flyvalle bot/flyvalle/db.json");
@@ -117,10 +117,8 @@ module.exports = {
     await interaction.deferReply({ ephemeral: true });
     if (interaction.user.tag == "Caleb.#4520") return interaction.editReply({ content: "Until further notice, you are banned from this command.", ephemeral: true })
     if (interaction.member.roles.cache.has("1039580833725562910") || interaction.member.roles.cache.has("1072562973270351892") || interaction.user.tag == "JackTheFine#0205") {
-      client1.user.setActivity("to butter.mp3", { type: "LISTENING" })
       switch (interaction.options._subcommand) {
         case "create":
-          console.log("got to path")
           if (
             !interaction.options.getString("host") ||
             !interaction.options.getString("time") ||
@@ -161,7 +159,7 @@ module.exports = {
             db.set("noFlightsMessageId", null);
             db.save();
           }
-          const b = new MessageEmbed()
+          const b = new EmbedBuilder()
             .setAuthor({ name: `${interaction.user.tag}` })
             .setTitle("Flight Created")
             .setDescription(`${id}`)
@@ -203,7 +201,7 @@ module.exports = {
           db.save();
 
           interaction.editReply({ content: "Flight edited.", ephemeral: true });
-          const d = new MessageEmbed()
+          const d = new EmbedBuilder()
             .setAuthor({ name: `${interaction.user.tag}` })
             .setTitle("Flight Edited")
             .setDescription(`${id}`)
@@ -227,10 +225,10 @@ module.exports = {
           interaction.editReply({ content: "Flight deleted.", ephemeral: true });
 
           if (!Object.values(flights).length) {
-            const a = new MessageEmbed()
+            const a = new EmbedBuilder()
               .setColor("#0096FF")
               .setAuthor({ name: "Flight Manager" })
-              .setTitle("<:fv:1056519588826857502> Flight Status")
+              .setTitle("<:fv:1056514422958477312> Flight Status")
               .setDescription("There are no current flights at this time, check back later for new flights. This message will update when a new flight is created in our systems.")
               .setFooter({ text: "Flight Manager | Last updated:" })
               .setTimestamp()
@@ -238,21 +236,28 @@ module.exports = {
             db.set("noFlightsMessageId", reply.id);
             db.save();
           }
-          const c = new MessageEmbed()
+          const c = new EmbedBuilder()
             .setAuthor({ name: `${interaction.user.tag}` })
             .setTitle("Flight Deleted")
             .setDescription(`${id}`)
           client1.channels.cache.get("1075871055949873313").send({ embeds: [c] })
           break;
       }
-    } else return interaction.editReply({ content: "Invalid Permissions", ephemeral: true })
+    } else {
+      interaction.editReply({ content: "Invalid Permissions", ephemeral: true })
+      const d = new EmbedBuilder()
+            .setAuthor({ name: "Invalid Permissions" })
+            .setTitle(`${interaction.user.tag}`)
+            .setDescription(`Attempted to create/edit/delete a flight.`)
+          return client1.channels.cache.get("1075871055949873313").send({ embeds: [d] })
+    }
   }
 }
 
 function generateEmbed(flight) {
-  var embed = new MessageEmbed()
+  var embed = new EmbedBuilder()
     .setAuthor({ name: "Flight Manager" })
-    .setTitle("<:fv:1056519588826857502> Flight Information")
+    .setTitle("<:fv:1056514422958477312> Flight Information")
     .setColor("#0096FF")
     .addFields(
       { name: `Host`, value: flight.host, inline: true },

@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Collection, ActivityType } = require('discord.js');
 const fs = require('node:fs');
 const { token2 } = require('../config.json');
 require("./deploy-commands2")
@@ -22,8 +22,7 @@ for (const file of commandFiles) {
 
 client2.once(Events.ClientReady, () => {
   console.log(`Ready! (logged into ${client2.user.tag})`);
-  client2.user.setActivity(`rambam burn down`, { type: "WATCHING" })
-  client2.user.setStatus("idle")
+  client2.user.setPresence({activities: [{ name: `rambam burn down`, type: ActivityType.Watching}], status: 'online'})
 });
 
 client2.on(Events.InteractionCreate, async interaction => {

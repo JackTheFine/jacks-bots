@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Collection, EmbedBuilder, ActivityType } = require('discord.js');
 const fs = require('node:fs');
 const { token1 } = require('../config.json');
 require("./deploy-commands1")
@@ -22,8 +22,16 @@ for (const file of commandFiles) {
 
 client1.once(Events.ClientReady, () => {
   console.log(`Ready! (logged into ${client1.user.tag})`);
-  client1.user.setActivity(`all these flights.`, { type: "WATCHING" })
-  client1.user.setStatus("online")
+  client1.user.setPresence({activities: [{ name: `Flyvalle`, type: ActivityType.Playing}], status: 'online'})
+//client1.channels.cache.get("965490644967645204").messages.fetch("1056526111854571530").then(message => message.delete())
+  /*const a = new EmbedBuilder()
+	.setColor("#0096FF")
+	.setTitle('<:fv:1056514422958477312> Schedule')
+	//.setAuthor({ name: 'Flight Manager'})
+	.setDescription('In this channel you will find all upcoming FlyValle departures. Flight information will be posted prior departure. This channel will be purged after the flight is concluded.')
+	.setFooter({ text: `"You're the reason we fly!"` });
+
+  client1.channels.cache.get("965490644967645204").send({ embeds: [a]})*/
 });
 
 client1.on(Events.InteractionCreate, async interaction => {

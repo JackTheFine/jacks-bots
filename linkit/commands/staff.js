@@ -10,9 +10,9 @@ module.exports = {
       const a = interaction.reply
       const embed = new EmbedBuilder()
       .setAuthor({ name: "name"})
-      .setTitle("LinkIt Staff Team")
-      .setDescription("**Lead Programmer** JackTheFine *710257546908139649*")
-      .setFooter("Last Updated 4/30/2023")
+      .setTitle("Foxy Staff Team")
+      .setDescription("ERR")
+      .setFooter("Last Updated 0/00/0000")
         .addFields(
 		{ name: 'Regular field title', value: 'Some value here' },
 		{ name: 'fe', value: 'gw' },

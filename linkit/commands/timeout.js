@@ -25,10 +25,13 @@ const tohack = interaction.options.getUser("member")
       const embed = new EmbedBuilder()
 
                  .setAuthor({ name: `${interaction.user.tag}` })
-                .setTitle(`Timed Out ${tohack.user,tag}.`)
-                .setColor('#03fc2c')
+                .setTitle(`Timed Out ${tohack.user.tag}.`)
+                .setColor('#d47513')
                 .setTimestamp()
                 channel.send({ embeds: [embed] });
     return interaction.reply({ content: `${member} has been timed out for ${ms(time, { long: true })}`})
+
+      if(interaction.member.roles.highest.position <= member.roles.highest.position) 
+        return interaction.reply('Please drag my rank above the users rank for me to execute this command.')
     }
 }
