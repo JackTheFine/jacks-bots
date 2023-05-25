@@ -19,7 +19,7 @@ module.exports = {
         const reason = interaction.options.getString('reason')
 
         if(!member.bannable || member.user.id === client.user.id) 
-        return interaction.reply("I am unable to ban this membe.");
+        return interaction.reply("I am unable to ban this member.");
         
         if(interaction.member.roles.highest.position <= member.roles.highest.position) 
         return interaction.reply('Please drag my rank above the users rank for me to execute this command.')

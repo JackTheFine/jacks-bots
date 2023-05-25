@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<body>
+<span style="word-wrap: break-word; white-space: pre-wrap;">{
+    "up": "yes",
+    "time": "<span id="countup"></span>"
+}</span>
+</body>
+  <script>
+    var seconds = 0
+
+var timer = setInterval(upTimer, 1000);
+
+function upTimer() {
+
+++seconds;
+
+var hour = Math.floor(seconds / 3600);
+
+var minute = Math.floor((seconds - hour * 3600) / 60);
+
+var updSecond = seconds - (hour * 3600 + minute * 60);
+
+document.getElementById("countup").innerHTML = hour + ":" + minute + ":" + updSecond;
+
+}
+  </script>
+</html>

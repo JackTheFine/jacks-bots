@@ -2,7 +2,7 @@ const { Client, Events, GatewayIntentBits, Collection, ActivityType } = require(
 const fs = require('node:fs');
 const { token3 } = require('../config.json');
 require("./deploy-commands3")
-
+git 
 const client3 = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMembers] });
 
 client3.commandsa = new Collection();

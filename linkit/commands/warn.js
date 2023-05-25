@@ -25,7 +25,7 @@ module.exports = {
         .setDescription('check warnings')
         .addUserOption(option => option.setName('target').setDescription('The member to check warnings of').setRequired(true))),
     async execute(interaction, client) {
-      if (interaction.guild =! "1015128770639831051") { console.log(":(")}
+      if (interaction.guild =! "101512
         var abc = false
         const tohack = interaction.options.getMember('target');
         const channel = client.channels.cache.get('1084944035912876125');
